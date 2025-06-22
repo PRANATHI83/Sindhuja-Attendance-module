@@ -203,7 +203,6 @@ app.delete('/api/admin/records', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
- HEAD
     console.log(`Server running on http://13.201.36.187:${port}`);
 
 });
