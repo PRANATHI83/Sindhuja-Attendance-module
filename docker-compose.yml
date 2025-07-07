@@ -7,40 +7,37 @@ services:
     ports:
       - "5208:5432"
     environment:
-      POSTGRES_DB: attendance_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: attendance_db
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   backend:
-    build:
-      context: ./Backend
-    container_name: attendance-backend
-    ports:
+    build: ./Backend
+    container_name: attendance_backend
+    port
       - "3208:3208"
     depends_on:
       - postgres
 
   employee-attendance:
-    build:
-      context: ./Employee-attendance
-    container_name: employee-attendance
+    build: ./Employee-attendance
+    container_name: employee_attendance_ui
     ports:
       - "8015:80"
     depends_on:
       - backend
 
   hr-attendance:
-    build:
-      context: ./HR-attendance
-    container_name: hr-attendance
+    build: ./HR-attendance
+    container_name: hr_attendance_ui
     ports:
       - "8016:80"
     depends_on:
       - backend
 
 volumes:
-  pgdata:
+  postgres_data:
 
